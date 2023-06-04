@@ -1,0 +1,823 @@
+openapi: 3.1.0
+x-stoplight:
+  id: rwz6p3832b96k
+info:
+  title: Minerva
+  description: Training Management System
+  contact:
+    name: Alexandre Lamberty
+    email: mail@alexandrelamberty.com
+    url: "https://alexandrelamberty.com"
+  license:
+    name: MIT License
+    url: "https://opensource.org/licenses/MIT"
+  version: 0.0.1
+servers:
+  - url: "https://dev.api.hortus.lan"
+    description: Development server
+  - url: "https://staging.api.hortus.lan"
+    description: Staging server
+  - url: "https://api.minerva.eevos.com"
+    description: Production server
+tags:
+  - name: Auth
+    description: Endpoints for authentication-related operations
+  - name: Category
+    description: Endpoints for category-related operations
+  - name: Training
+    description: Endpoints for training-related operations
+  - name: Course
+    description: Endpoints for course-related operations
+  - name: Course Date
+    description: Endpoints for course-date-related operations
+  - name: Course Material
+    description: Endpoints for course-material-related operations
+  - name: Student
+    description: Endpoints for student-related operations
+  - name: Teacher
+    description: Endpoints for teacher-related operations
+  - name: User
+    description: Endpoints for user-related operations
+paths:
+  /auth/register:
+    parameters: []
+    post:
+      summary: Register a user
+      tags:
+        - auth
+      operationId: post-auth-register
+      responses:
+        "200":
+          description: OK
+  /auth/login:
+    post:
+      summary: Login User
+      tags:
+        - auth
+      operationId: post-auth-login
+      responses:
+        "200":
+          description: OK
+  /auth/logout:
+    get:
+      summary: Log out the user
+      tags:
+        - auth
+      responses: {}
+      operationId: get-auth-logout
+    parameters: []
+  /auth/recover:
+    get:
+      summary: Resets user account password
+      tags:
+        - auth
+      responses: {}
+      operationId: get-auth-recover
+    parameters: []
+  /auth/whoami:
+    get:
+      summary: Retrieves user details
+      tags:
+        - auth
+      responses: {}
+      operationId: get-auth-login
+    parameters: []
+  /categories:
+    get:
+      summary: Retrieves categories
+      tags:
+        - category
+      responses:
+        "200":
+          description: OK
+          content: {}
+      operationId: get-categories
+    post:
+      summary: Creates category
+      tags:
+        - category
+      operationId: post-categories
+      responses:
+        "200":
+          description: OK
+      requestBody:
+        $ref: "#/components/requestBodies/CreateCategory"
+  "/categories/{categoryId}":
+    parameters:
+      - schema:
+          type: string
+        name: categoryId
+        in: path
+        required: true
+    get:
+      summary: Retrieves category with provided ID.
+      tags:
+        - category
+      responses: {}
+      operationId: get-categories-categoryId
+    patch:
+      summary: Updates category with provided ID.
+      tags:
+        - category
+      operationId: patch-categories-categoryId
+      responses:
+        "200":
+          descrisption: OK
+    delete:
+      summary: Deletes category with provided ID.
+      tags:
+        - category
+      operationId: delete-categories-categoryId
+      responses:
+        "200":
+          description: OK
+  /trainings:
+    get:
+      summary: Retrieves trainings
+      tags:
+        - training
+      responses: {}
+      operationId: get-trainings
+      parameters: []
+    post:
+      summary: Creates training
+      tags:
+        - training
+      operationId: post-trainings
+      responses:
+        "200":
+          description: OK
+  "/trainings/{trainingId}":
+    parameters:
+      - schema:
+          type: string
+        name: trainingId
+        in: path
+        required: true
+    get:
+      summary: Retrieves training with provided ID.
+      tags:
+        - training
+      responses: {}
+      operationId: get-courses-coursId
+    patch:
+      summary: Updates training with provided ID.
+      tags:
+        - training
+      operationId: patch-trainings-trainingId
+      responses:
+        "200":
+          description: OK
+    delete:
+      summary: Deletes training with provided ID.
+      tags:
+        - training
+      operationId: delete-trainings-trainingId
+      responses:
+        "200":
+          description: OK
+  /courses:
+    get:
+      summary: Retrieves courses
+      tags:
+        - course
+      responses: {}
+      operationId: get-courses
+    post:
+      summary: Creates course
+      tags:
+        - course
+      operationId: post-courses
+      responses:
+        "200":
+          description: OK
+      description: ""
+  "/courses/{courseId}":
+    parameters:
+      - schema:
+          type: string
+        name: courseId
+        in: path
+        required: true
+    get:
+      summary: Retrieves course with provided ID.
+      tags:
+        - course
+      responses: {}
+      operationId: get-courses-courseId
+    patch:
+      summary: Updates course with provided ID.
+      tags:
+        - course
+      operationId: patch-courses-courseId
+      responses:
+        "200":
+          description: OK
+    delete:
+      summary: Deletes course with provided ID.
+      tags:
+        - training
+      operationId: delete-courses-courseId
+      responses:
+        "200":
+          description: OK
+  "/courses/{courseId}/dates":
+    parameters:
+      - schema:
+          type: string
+        name: courseId
+        in: path
+        required: true
+    get:
+      summary: Retrieves course dates for course with provided ID.
+      tags:
+        - course
+      responses: {}
+      operationId: get-courses-courseId-dates
+      description: Retrieve a list of CourseDate for the course with the provided by ID
+    post:
+      summary: Creates course date for course with provided ID.
+      tags:
+        - course
+      operationId: post-courses-courseId-dates
+      responses:
+        "200":
+          description: OK
+  "/courses/{courseId}/dates/{courseDateId}":
+    parameters:
+      - schema:
+          type: string
+        name: courseId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: courseDateId
+        in: path
+        required: true
+    patch:
+      summary: Update course date
+      tags:
+        - course
+      operationId: patch-courses-courseId-dates-courseDateId
+      responses:
+        "200":
+          description: OK
+    delete:
+      summary: Delete course date
+      tags:
+        - training
+      operationId: delete-courses-courseId-dates-courseDateId
+      responses:
+        "200":
+          description: OK
+  "/courses/{courseId}/materials":
+    parameters:
+      - schema:
+          type: string
+        name: courseId
+        in: path
+        required: true
+    get:
+      summary: Retrieves course materials for course with provided ID.
+      tags:
+        - course
+      responses: {}
+      operationId: get-courses-courseId-dates
+    post:
+      summary: Creates course material for course with provided ID.
+      tags:
+        - course
+      operationId: post-courses-courseId-materials
+      responses:
+        "200":
+          description: OK
+  "/courses/{courseId}/materials/{materialId}":
+    parameters:
+      - schema:
+          type: string
+        name: courseId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: materialId
+        in: path
+        required: true
+    patch:
+      summary: Update course material with provided ID.
+      tags:
+        - course
+      operationId: patch-courses-courseId-materials-materialId
+      responses:
+        "200":
+          description: OK
+    delete:
+      summary: Delete course material with provided ID.
+      tags:
+        - course
+      operationId: delete-courses-courseId-materials-materialId
+      responses:
+        "200":
+          description: OK
+  /materials/:
+    get:
+      summary: Retreieves course materials
+      tags:
+        - Course Material
+      responses: {}
+      operationId: get-course-materials
+    parameters: []
+  /dates/:
+    get:
+      summary: Retreieves Course Dates
+      tags:
+        - Course Date
+      responses: {}
+      operationId: get-course-dates
+    parameters: []
+  /students/:
+    get:
+      summary: Retrieves students
+      tags:
+        - Student
+      responses: {}
+      operationId: get-students
+    parameters: []
+    post:
+      summary: Creates student
+      tags:
+        - Student
+      operationId: post-students
+      responses:
+        "200":
+          description: OK
+  "/students/{studentId}":
+    get:
+      summary: Retrieves student with provided ID.
+      tags:
+        - Student
+      responses: {}
+      operationId: get-students
+    parameters:
+      - schema:
+          type: string
+        name: studentId
+        in: path
+        required: true
+    patch:
+      summary: Updates user with provided ID.
+      tags:
+        - Student
+      operationId: patch-students-studentId
+      responses:
+        "200":
+          description: OK
+    delete:
+      summary: Deletes user with provided ID.
+      tags:
+        - Student
+      operationId: delete-students-studentId
+      responses:
+        "200":
+          description: OK
+  /teachers/:
+    get:
+      summary: Retrieves teachers
+      tags:
+        - Teacher
+      responses: {}
+      operationId: get-teachers
+    parameters: []
+    post:
+      summary: Creates teacher
+      tags:
+        - Teacher
+      operationId: post-teachers
+      responses:
+        "200":
+          description: OK
+  "/teachers/{teacherId}":
+    get:
+      summary: Retrieves teacher with provided ID.
+      tags:
+        - Teacher
+      responses: {}
+      operationId: get-teachers
+    parameters:
+      - schema:
+          type: string
+        name: teacherId
+        in: path
+        required: true
+    patch:
+      summary: Updates teacher with provided ID.
+      tags:
+        - Teacher
+      operationId: patch-teachers-teacherId
+      responses:
+        "200":
+          description: OK
+    delete:
+      summary: Delete teacher with provided ID.
+      tags:
+        - Teacher
+      operationId: delete-teachers-teacherId
+      responses:
+        "200":
+          description: OK
+  /users:
+    post:
+      summary: Creates user
+      tags:
+        - User
+      operationId: post-user
+      responses:
+        "200":
+          description: User Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+              examples:
+                New User Bob Fellow:
+                  value:
+                    id: 12
+                    firstName: Bob
+                    lastName: Fellow
+                    email: bob.fellow@gmail.com
+                    dateOfBirth: "1996-08-24"
+                    emailVerified: false
+                    createDate: "2020-11-18"
+        "400":
+          description: Missing Required Information
+        "409":
+          description: Email Already Taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                dateOfBirth:
+                  type: string
+                  format: date
+              required:
+                - firstName
+                - lastName
+                - email
+                - dateOfBirth
+            examples:
+              Create User Bob Fellow:
+                value:
+                  firstName: Bob
+                  lastName: Fellow
+                  email: bob.fellow@gmail.com
+                  dateOfBirth: "1996-08-24"
+        description: Post the necessary fields for the API to create a new user.
+      description: Create a new user.
+    parameters: []
+    get:
+      summary: Retrieves users
+      tags:
+        - user
+      operationId: get-users
+      responses:
+        "200":
+          description: OK
+  "/users/{userId}":
+    parameters:
+      - schema:
+          type: integer
+        name: userId
+        in: path
+        required: true
+        description: Id of an existing user.
+    get:
+      summary: Retrieves user with provided ID.
+      tags:
+        - User
+      responses:
+        "200":
+          description: User Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+              examples:
+                Get User Alice Smith:
+                  value:
+                    id: 142
+                    firstName: Alice
+                    lastName: Smith
+                    email: alice.smith@gmail.com
+                    dateOfBirth: "1997-10-31"
+                    emailVerified: true
+                    signUpDate: "2019-08-24"
+        "404":
+          description: User Not Found
+      operationId: get-users-userId
+      description: Retrieve the information of the user with the matching user ID.
+    patch:
+      summary: Updates user with provided ID.
+      tags:
+        - User
+      operationId: patch-users-userId
+      responses:
+        "200":
+          description: User Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+              examples:
+                Updated User Rebecca Baker:
+                  value:
+                    id: 13
+                    firstName: Rebecca
+                    lastName: Baker
+                    email: rebecca@gmail.com
+                    dateOfBirth: "1985-10-02"
+                    emailVerified: false
+                    createDate: "2019-08-24"
+        "404":
+          description: User Not Found
+        "409":
+          description: Email Already Taken
+      description: Update the information of an existing user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                  description: "If a new email is given, the user's email verified property will be set to false."
+                dateOfBirth:
+                  type: string
+            examples:
+              Update First Name:
+                value:
+                  firstName: Rebecca
+              Update Email:
+                value:
+                  email: rebecca@gmail.com
+              Update Last Name & Date of Birth:
+                value:
+                  lastName: Baker
+                  dateOfBirth: "1985-10-02"
+        description: Patch user properties to update.
+    delete:
+      summary: Delete user with provided ID.
+      tags:
+        - Student
+      operationId: delete-users-userId
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    Training:
+      title: Training
+      x-stoplight:
+        id: epopmedw05ton
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          x-stoplight:
+            id: lmf6r8y3t13ml
+        description:
+          type: string
+          x-stoplight:
+            id: ux2u2b9jmxyxj
+        cover:
+          type: string
+          x-stoplight:
+            id: 1fhda1taszozg
+        students:
+          type: string
+          x-stoplight:
+            id: ux8j3gothw688
+    TrainingCategory:
+      title: TrainingCategory
+      x-stoplight:
+        id: 7lka3qfu5c9jc
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          x-stoplight:
+            id: m2vx6mr49mbkr
+        description:
+          type: string
+          x-stoplight:
+            id: pebfpm88u6dk7
+    Course:
+      title: Course
+      x-stoplight:
+        id: mirzo95ncdowy
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          x-stoplight:
+            id: c3t40lh6jo3pu
+        description:
+          type: string
+          x-stoplight:
+            id: l0vk39cspxcfb
+        cover:
+          type: string
+          x-stoplight:
+            id: dwbmi8sjybdp4
+        teacher:
+          $ref: "#/components/schemas/User"
+          x-stoplight:
+            id: nulwmp1n22cj6
+        dates:
+          type: array
+          x-stoplight:
+            id: su93mvq5rtvle
+          items:
+            $ref: "#/components/schemas/CourseDate"
+            x-stoplight:
+              id: lsdram5l6ailc
+        materials:
+          type: array
+          x-stoplight:
+            id: rhjql0i0lknw2
+          items:
+            $ref: "#/components/schemas/CourseMaterial"
+            x-stoplight:
+              id: 9a1qawbwgtr7b
+    CourseDate:
+      title: CourseDate
+      x-stoplight:
+        id: asg0lnfj7j7lv
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+          x-stoplight:
+            id: f9d97d4f5l2az
+        course:
+          $ref: "#/components/schemas/Course"
+          x-stoplight:
+            id: sulkr5ibgb2m9
+        teacher:
+          $ref: "#/components/schemas/User"
+          x-stoplight:
+            id: wmwz61a41sokc
+        attendances:
+          type: array
+          x-stoplight:
+            id: y5vy8c7gg93hc
+          items:
+            $ref: "#/components/schemas/CourseDateAttendance"
+            x-stoplight:
+              id: w15imnw1ho8dg
+    CourseDateAttendance:
+      title: CourseDateAttendance
+      x-stoplight:
+        id: 6mncd0ml7fad2
+      type: object
+      properties:
+        id:
+          type: string
+        course:
+          $ref: "#/components/schemas/Course"
+          x-stoplight:
+            id: 8kr0nrj0ulued
+        date:
+          $ref: "#/components/schemas/CourseDate"
+          x-stoplight:
+            id: wm2nkjactkkei
+        student:
+          $ref: "#/components/schemas/User"
+          x-stoplight:
+            id: 9egsshubs00ma
+    CourseMaterial:
+      title: CourseMaterial
+      x-stoplight:
+        id: rut2yo5az3ckw
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          x-stoplight:
+            id: 3hnicl12vd675
+        file:
+          type: string
+          x-stoplight:
+            id: 09rkk73v01qch
+    User:
+      title: User
+      type: object
+      examples:
+        - id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: "1997-10-31"
+          emailVerified: true
+          signUpDate: "2019-08-24"
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+          example: "1997-10-31"
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+        role:
+          type: string
+          x-stoplight:
+            id: k4ausnkqf3wd7
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
+      description: ""
+  requestBodies:
+    CreateCategory:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                x-stoplight:
+                  id: tpngcthr29zil
+              description:
+                type: string
+                x-stoplight:
+                  id: mmzzuz2vjdd7q
+    CreateTraining:
+      content:
+        application/json:
+          schema:
+            type: object
+    CreateCourse:
+      content:
+        application/json:
+          schema:
+            type: object
+    CreateCourseDate:
+      content:
+        application/json:
+          schema:
+            type: object
+    CreateCourseMaterial:
+      content:
+        application/json:
+          schema:
+            type: object
+    LoginUser:
+      content:
+        application/json:
+          schema:
+            type: object
+    RegisterUser:
+      content:
+        application/json:
+          schema:
+            type: object
