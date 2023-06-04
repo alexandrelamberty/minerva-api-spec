@@ -44,7 +44,7 @@ paths:
     post:
       summary: Register a user
       tags:
-        - auth
+        - Auth
       operationId: post-auth-register
       responses:
         "200":
@@ -53,7 +53,7 @@ paths:
     post:
       summary: Login User
       tags:
-        - auth
+        - Auth
       operationId: post-auth-login
       responses:
         "200":
@@ -62,7 +62,7 @@ paths:
     get:
       summary: Log out the user
       tags:
-        - auth
+        - Auth
       responses: {}
       operationId: get-auth-logout
     parameters: []
@@ -70,7 +70,7 @@ paths:
     get:
       summary: Resets user account password
       tags:
-        - auth
+        - Auth
       responses: {}
       operationId: get-auth-recover
     parameters: []
@@ -78,7 +78,7 @@ paths:
     get:
       summary: Retrieves user details
       tags:
-        - auth
+        - Auth
       responses: {}
       operationId: get-auth-login
     parameters: []
@@ -86,7 +86,7 @@ paths:
     get:
       summary: Retrieves categories
       tags:
-        - category
+        - Category
       responses:
         "200":
           description: OK
@@ -95,7 +95,7 @@ paths:
     post:
       summary: Creates category
       tags:
-        - category
+        - Category
       operationId: post-categories
       responses:
         "200":
@@ -112,21 +112,23 @@ paths:
     get:
       summary: Retrieves category with provided ID.
       tags:
-        - category
-      responses: {}
+        - Category
+      responses:
+        "200":
+          description: OK
       operationId: get-categories-categoryId
     patch:
       summary: Updates category with provided ID.
       tags:
-        - category
+        - Category
       operationId: patch-categories-categoryId
       responses:
         "200":
-          descrisption: OK
+          description: OK
     delete:
       summary: Deletes category with provided ID.
       tags:
-        - category
+        - Category
       operationId: delete-categories-categoryId
       responses:
         "200":
@@ -135,14 +137,14 @@ paths:
     get:
       summary: Retrieves trainings
       tags:
-        - training
+        - Training
       responses: {}
       operationId: get-trainings
       parameters: []
     post:
       summary: Creates training
       tags:
-        - training
+        - Training
       operationId: post-trainings
       responses:
         "200":
@@ -157,13 +159,13 @@ paths:
     get:
       summary: Retrieves training with provided ID.
       tags:
-        - training
+        - Training
       responses: {}
       operationId: get-courses-coursId
     patch:
       summary: Updates training with provided ID.
       tags:
-        - training
+        - Training
       operationId: patch-trainings-trainingId
       responses:
         "200":
@@ -171,7 +173,7 @@ paths:
     delete:
       summary: Deletes training with provided ID.
       tags:
-        - training
+        - Training
       operationId: delete-trainings-trainingId
       responses:
         "200":
@@ -180,13 +182,13 @@ paths:
     get:
       summary: Retrieves courses
       tags:
-        - course
+        - Course
       responses: {}
       operationId: get-courses
     post:
       summary: Creates course
       tags:
-        - course
+        - Course
       operationId: post-courses
       responses:
         "200":
@@ -202,13 +204,13 @@ paths:
     get:
       summary: Retrieves course with provided ID.
       tags:
-        - course
+        - Course
       responses: {}
       operationId: get-courses-courseId
     patch:
       summary: Updates course with provided ID.
       tags:
-        - course
+        - Course
       operationId: patch-courses-courseId
       responses:
         "200":
@@ -216,7 +218,7 @@ paths:
     delete:
       summary: Deletes course with provided ID.
       tags:
-        - training
+        - Course
       operationId: delete-courses-courseId
       responses:
         "200":
@@ -231,14 +233,14 @@ paths:
     get:
       summary: Retrieves course dates for course with provided ID.
       tags:
-        - course
+        - Course
       responses: {}
       operationId: get-courses-courseId-dates
       description: Retrieve a list of CourseDate for the course with the provided by ID
     post:
       summary: Creates course date for course with provided ID.
       tags:
-        - course
+        - Course
       operationId: post-courses-courseId-dates
       responses:
         "200":
@@ -258,7 +260,7 @@ paths:
     patch:
       summary: Update course date
       tags:
-        - course
+        - Course
       operationId: patch-courses-courseId-dates-courseDateId
       responses:
         "200":
@@ -266,7 +268,7 @@ paths:
     delete:
       summary: Delete course date
       tags:
-        - training
+        - Course
       operationId: delete-courses-courseId-dates-courseDateId
       responses:
         "200":
@@ -281,13 +283,13 @@ paths:
     get:
       summary: Retrieves course materials for course with provided ID.
       tags:
-        - course
+        - Course
       responses: {}
-      operationId: get-courses-courseId-dates
+      operationId: get-courses-courseId-materials
     post:
       summary: Creates course material for course with provided ID.
       tags:
-        - course
+        - Course
       operationId: post-courses-courseId-materials
       responses:
         "200":
@@ -307,7 +309,7 @@ paths:
     patch:
       summary: Update course material with provided ID.
       tags:
-        - course
+        - Course
       operationId: patch-courses-courseId-materials-materialId
       responses:
         "200":
@@ -315,14 +317,14 @@ paths:
     delete:
       summary: Delete course material with provided ID.
       tags:
-        - course
+        - Course
       operationId: delete-courses-courseId-materials-materialId
       responses:
         "200":
           description: OK
   /materials/:
     get:
-      summary: Retreieves course materials
+      summary: Retrieves course materials
       tags:
         - Course Material
       responses: {}
@@ -330,7 +332,7 @@ paths:
     parameters: []
   /dates/:
     get:
-      summary: Retreieves Course Dates
+      summary: Retrieves Course Dates
       tags:
         - Course Date
       responses: {}
@@ -358,7 +360,7 @@ paths:
       tags:
         - Student
       responses: {}
-      operationId: get-students
+      operationId: get-students-studentId
     parameters:
       - schema:
           type: string
@@ -403,7 +405,7 @@ paths:
       tags:
         - Teacher
       responses: {}
-      operationId: get-teachers
+      operationId: get-teachers-teacherId
     parameters:
       - schema:
           type: string
@@ -486,7 +488,7 @@ paths:
     get:
       summary: Retrieves users
       tags:
-        - user
+        - User
       operationId: get-users
       responses:
         "200":
