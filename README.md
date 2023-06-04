@@ -1,5 +1,5 @@
 [![Lint](https://github.com/alexandrelamberty/minerva-api-spec/actions/workflows/lint.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api-spec/actions/workflows/lint.yaml)
-[![Doc](https://github.com/alexandrelamberty/minerva-api-spec/actions/workflows/docs.yaml/badge.svg)](https://github.com/alexandrelamberty/hortus-api-spec/actions/workflows/docs.yaml)
+[![Doc](https://github.com/alexandrelamberty/minerva-api-spec/actions/workflows/docs.yaml/badge.svg)](https://github.com/alexandrelamberty/minerva-api-spec/actions/workflows/docs.yaml)
 
 # Minerva API specification
 
