@@ -3,8 +3,10 @@
 
 # Minerva API specification
 
-This repository contains the OpenAPI specification (written in YAML) for a Training Management System. The OpenAPI specification defines the API endpoints, request/response schemas, and other relevant details necessary for implementing and interacting with the Training Management System.
+This repository contains the [OpenAPI](https://www.openapis.org/) specification for a Training Management System.
 
-This API specification is part of the [Minerva](https://github.com/alexandrelamberty/minerva) project.
+The specification defines the API endpoints, request/response schemas, and other relevant details necessary for interacting with the [Minerva API](https://github.com/alexandrelamberty/minerva-api/).
 
-See the API [documentation](https://alexandrelamberty.github.io/minerva-api-spec/).
+> This repository is part of the [Minerva](https://github.com/alexandrelamberty/minerva) project.
+
+See the [documentation](https://alexandrelamberty.github.io/minerva-api-spec/).
