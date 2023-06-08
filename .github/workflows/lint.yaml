@@ -1,5 +1,10 @@
 name: Lint
 
+# This GitHub Action sets up a workflow to lint the YAML API specification file.
+# It utilizes the actions/checkout action to fetch the codebase and the
+# github/super-linter action to perform linting.
+# https://github.com/super-linter/super-linter
+
 on:
   push:
     branches:
@@ -15,15 +20,15 @@ jobs:
     name: Lint Code Base
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Code checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Lint api
+      - name: Lint API
         uses: github/super-linter@v4
         env:
-          #VALIDATE_ALL_CODEBASE: false
+          # VALIDATE_ALL_CODEBASE: false
           VALIDATE_OPENAPI: true
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

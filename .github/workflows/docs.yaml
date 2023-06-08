@@ -1,5 +1,11 @@
 name: Docs
 
+# This GitHub Action sets up a workflow to deploy documentation.
+# It utilizes the actions/checkout action to fetch the codebase and the
+# peaceiris/actions-gh-pages action to deploy a directory.
+# TODO: Make action that copy yaml file and contain a template! Now it just copy
+# the docs folder to the gh-pages.
+# https://github.com/peaceiris/actions-gh-pages
 on:
   push:
     branches:
