@@ -6,6 +6,7 @@ name: Docs
 # TODO: Make action that copy yaml file and contain a template! Now it just copy
 # the docs folder to the gh-pages.
 # https://github.com/peaceiris/actions-gh-pages
+
 on:
   push:
     branches:
