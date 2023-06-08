@@ -49,6 +49,13 @@ paths:
       responses:
         "200":
           description: OK
+      description: Register a user in the system.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
   /auth/login:
     post:
       summary: Login User
@@ -57,30 +64,42 @@ paths:
       operationId: post-auth-login
       responses:
         "200":
-          description: OK
+          $ref: "#/components/responses/LoginSuccess"
+      description: Authenticate a user.
   /auth/logout:
     get:
       summary: Log out the user
       tags:
         - Auth
-      responses: {}
+      responses:
+        "200":
+          description: Logout Success
       operationId: get-auth-logout
+      description: Log-out a user from the system.
     parameters: []
   /auth/recover:
     get:
       summary: Resets user account password
       tags:
         - Auth
-      responses: {}
+      responses:
+        "200":
+          description: Reset Mail Send Success
       operationId: get-auth-recover
+      description: Send an email to reset the password for a user account.
     parameters: []
   /auth/whoami:
     get:
       summary: Retrieves user details
       tags:
         - Auth
-      responses: {}
+      responses:
+        "200":
+          description: OK
       operationId: get-auth-login
+      description: Return informations about the authenticated user.
+      requestBody:
+        content: {}
     parameters: []
   /categories:
     get:
@@ -92,6 +111,7 @@ paths:
           description: OK
           content: {}
       operationId: get-categories
+      description: Get all categories with pagination.
     post:
       summary: Creates category
       tags:
@@ -102,6 +122,7 @@ paths:
           description: OK
       requestBody:
         $ref: "#/components/requestBodies/CreateCategory"
+      description: Create category with the provided data.
   "/categories/{categoryId}":
     parameters:
       - schema:
@@ -109,6 +130,7 @@ paths:
         name: categoryId
         in: path
         required: true
+        description: The ID of the category to perform action on.
     get:
       summary: Retrieves category with provided ID.
       tags:
@@ -117,6 +139,7 @@ paths:
         "200":
           description: OK
       operationId: get-categories-categoryId
+      description: Get a category by its ID.
     patch:
       summary: Updates category with provided ID.
       tags:
@@ -125,6 +148,7 @@ paths:
       responses:
         "200":
           description: OK
+      description: Updates category by ID with the provided data.
     delete:
       summary: Deletes category with provided ID.
       tags:
@@ -133,14 +157,18 @@ paths:
       responses:
         "200":
           description: OK
+      description: Deletes category by ID.
   /trainings:
     get:
       summary: Retrieves trainings
       tags:
         - Training
-      responses: {}
+      responses:
+        "200":
+          description: OK
       operationId: get-trainings
       parameters: []
+      description: Get all trainings with pagination.
     post:
       summary: Creates training
       tags:
@@ -149,6 +177,7 @@ paths:
       responses:
         "200":
           description: OK
+      description: Create training with the provided data.
   "/trainings/{trainingId}":
     parameters:
       - schema:
@@ -156,12 +185,16 @@ paths:
         name: trainingId
         in: path
         required: true
+        description: The ID of the training to perform action on.
     get:
       summary: Retrieves training with provided ID.
       tags:
         - Training
-      responses: {}
-      operationId: get-courses-coursId
+      responses:
+        "200":
+          description: OK
+      operationId: get-training-trainingId
+      description: Retrieves training information.
     patch:
       summary: Updates training with provided ID.
       tags:
@@ -170,11 +203,13 @@ paths:
       responses:
         "200":
           description: OK
+      description: Updates training by ID with the provided data.
     delete:
       summary: Deletes training with provided ID.
       tags:
         - Training
       operationId: delete-trainings-trainingId
+      description: Deletes training.
       responses:
         "200":
           description: OK
@@ -183,8 +218,11 @@ paths:
       summary: Retrieves courses
       tags:
         - Course
-      responses: {}
+      responses:
+        "200":
+          description: OK
       operationId: get-courses
+      description: Gets all courses with pagination.
     post:
       summary: Creates course
       tags:
@@ -193,7 +231,7 @@ paths:
       responses:
         "200":
           description: OK
-      description: ""
+      description: Create course with provided data.
   "/courses/{courseId}":
     parameters:
       - schema:
@@ -201,12 +239,16 @@ paths:
         name: courseId
         in: path
         required: true
+        description: The ID of the course to perform action on.
     get:
       summary: Retrieves course with provided ID.
       tags:
         - Course
-      responses: {}
+      responses:
+        "200":
+          description: OK
       operationId: get-courses-courseId
+      description: Gets course by ID.
     patch:
       summary: Updates course with provided ID.
       tags:
@@ -215,6 +257,7 @@ paths:
       responses:
         "200":
           description: OK
+      description: Update a course by its ID with the provided data.
     delete:
       summary: Deletes course with provided ID.
       tags:
@@ -223,6 +266,7 @@ paths:
       responses:
         "200":
           description: OK
+      description: Deletes course by ID.
   "/courses/{courseId}/dates":
     parameters:
       - schema:
@@ -230,11 +274,14 @@ paths:
         name: courseId
         in: path
         required: true
+        description: The ID of the course to perform action on.
     get:
       summary: Retrieves course dates for course with provided ID.
       tags:
         - Course
-      responses: {}
+      responses:
+        "200":
+          description: OK
       operationId: get-courses-courseId-dates
       description: Retrieve a list of CourseDate for the course with the provided by ID
     post:
@@ -245,6 +292,7 @@ paths:
       responses:
         "200":
           description: OK
+      description: Create course date with provided data.
   "/courses/{courseId}/dates/{courseDateId}":
     parameters:
       - schema:
@@ -252,11 +300,13 @@ paths:
         name: courseId
         in: path
         required: true
+        description: The ID of the course to perform action on.
       - schema:
           type: string
         name: courseDateId
         in: path
         required: true
+        description: The ID of the course date to perform action on.
     patch:
       summary: Update course date
       tags:
@@ -265,11 +315,13 @@ paths:
       responses:
         "200":
           description: OK
+      description: Updates course date by ID with the provided data.
     delete:
       summary: Delete course date
       tags:
         - Course
       operationId: delete-courses-courseId-dates-courseDateId
+      description: Deletes a course date.
       responses:
         "200":
           description: OK
@@ -280,12 +332,16 @@ paths:
         name: courseId
         in: path
         required: true
+        description: The ID of the course to perform action on.
     get:
       summary: Retrieves course materials for course with provided ID.
       tags:
         - Course
-      responses: {}
+      responses:
+        "200":
+          description: OK
       operationId: get-courses-courseId-materials
+      description: "Get all course material "
     post:
       summary: Creates course material for course with provided ID.
       tags:
@@ -294,6 +350,7 @@ paths:
       responses:
         "200":
           description: OK
+      description: Create course material with the provided data.
   "/courses/{courseId}/materials/{materialId}":
     parameters:
       - schema:
@@ -301,11 +358,13 @@ paths:
         name: courseId
         in: path
         required: true
+        description: The ID of the course to perform action on.
       - schema:
           type: string
         name: materialId
         in: path
         required: true
+        description: The ID of the course material to perform action on.
     patch:
       summary: Update course material with provided ID.
       tags:
@@ -314,6 +373,7 @@ paths:
       responses:
         "200":
           description: OK
+      description: Updates course material by ID with provided data.
     delete:
       summary: Delete course material with provided ID.
       tags:
@@ -322,29 +382,39 @@ paths:
       responses:
         "200":
           description: OK
-  /materials/:
+      description: Deletes course material by ID
+  /materials:
     get:
       summary: Retrieves course materials
       tags:
         - Course Material
-      responses: {}
-      operationId: get-course-materials
+      responses:
+        "200":
+          description: OK
+      operationId: get-materials
+      description: Retrieves a paginated list of course materials
     parameters: []
-  /dates/:
+  /dates:
     get:
       summary: Retrieves Course Dates
       tags:
         - Course Date
-      responses: {}
+      responses:
+        "200":
+          description: OK
       operationId: get-course-dates
+      description: Retrieves a paginated list of course dates.
     parameters: []
-  /students/:
+  /students:
     get:
       summary: Retrieves students
       tags:
         - Student
-      responses: {}
+      responses:
+        "200":
+          description: OK
       operationId: get-students
+      description: Create a student with the provided data.
     parameters: []
     post:
       summary: Creates student
@@ -354,19 +424,24 @@ paths:
       responses:
         "200":
           description: OK
+      description: Create student with provided data.
   "/students/{studentId}":
     get:
       summary: Retrieves student with provided ID.
       tags:
         - Student
-      responses: {}
+      responses:
+        "200":
+          description: OK
       operationId: get-students-studentId
+      description: Retrieves student with provided ID.
     parameters:
       - schema:
           type: string
         name: studentId
         in: path
         required: true
+        description: The ID of the student to perform action on.
     patch:
       summary: Updates user with provided ID.
       tags:
@@ -375,6 +450,7 @@ paths:
       responses:
         "200":
           description: OK
+      description: Updates stuendet by ID with provided data.
     delete:
       summary: Deletes user with provided ID.
       tags:
@@ -383,13 +459,17 @@ paths:
       responses:
         "200":
           description: OK
-  /teachers/:
+      description: Retrieves a paginated list of teachers.
+  /teachers:
     get:
       summary: Retrieves teachers
       tags:
         - Teacher
-      responses: {}
+      responses:
+        "200":
+          description: OK
       operationId: get-teachers
+      description: Retrieves a paginated list of teachers.
     parameters: []
     post:
       summary: Creates teacher
@@ -399,19 +479,24 @@ paths:
       responses:
         "200":
           description: OK
+      description: Create teacher with provided data.
   "/teachers/{teacherId}":
     get:
       summary: Retrieves teacher with provided ID.
       tags:
         - Teacher
-      responses: {}
+      responses:
+        "200":
+          description: OK
       operationId: get-teachers-teacherId
+      description: Updates teacher by ID with provided data.
     parameters:
       - schema:
           type: string
         name: teacherId
         in: path
         required: true
+        description: The ID of the teacher to perform action on.
     patch:
       summary: Updates teacher with provided ID.
       tags:
@@ -420,6 +505,7 @@ paths:
       responses:
         "200":
           description: OK
+      description: Updates teacher by ID with provided data.
     delete:
       summary: Delete teacher with provided ID.
       tags:
@@ -428,6 +514,7 @@ paths:
       responses:
         "200":
           description: OK
+      description: Deletes tracher by ID.
   /users:
     post:
       summary: Creates user
@@ -483,7 +570,7 @@ paths:
                   email: bob.fellow@gmail.com
                   dateOfBirth: "1996-08-24"
         description: Post the necessary fields for the API to create a new user.
-      description: Create a new user.
+      description: Create user with provided data.
     parameters: []
     get:
       summary: Retrieves users
@@ -493,6 +580,7 @@ paths:
       responses:
         "200":
           description: OK
+      description: Return a paginated list of users.
   "/users/{userId}":
     parameters:
       - schema:
@@ -500,7 +588,7 @@ paths:
         name: userId
         in: path
         required: true
-        description: Id of an existing user.
+        description: The ID of the user to perform action on.
     get:
       summary: Retrieves user with provided ID.
       tags:
@@ -525,7 +613,7 @@ paths:
         "404":
           description: User Not Found
       operationId: get-users-userId
-      description: Retrieve the information of the user with the matching user ID.
+      description: Returns user information by ID.
     patch:
       summary: Updates user with provided ID.
       tags:
@@ -552,7 +640,7 @@ paths:
           description: User Not Found
         "409":
           description: Email Already Taken
-      description: Update the information of an existing user.
+      description: Updates user by ID with provided data.
       requestBody:
         content:
           application/json:
@@ -588,6 +676,7 @@ paths:
       responses:
         "200":
           description: OK
+      description: Deletes user by ID.
 components:
   schemas:
     Training:
@@ -595,6 +684,7 @@ components:
       x-stoplight:
         id: epopmedw05ton
       type: object
+      description: "The Training model represents a training within the system, encapsulating various attributes and associated data. "
       properties:
         id:
           type: string
@@ -614,11 +704,15 @@ components:
           type: string
           x-stoplight:
             id: ux8j3gothw688
+      required:
+        - id
+        - name
     TrainingCategory:
       title: TrainingCategory
       x-stoplight:
         id: 7lka3qfu5c9jc
       type: object
+      description: "The TrainingCategory model represents a training category within the system, encapsulating various attributes and associated data. "
       properties:
         id:
           type: string
@@ -630,11 +724,15 @@ components:
           type: string
           x-stoplight:
             id: pebfpm88u6dk7
+      required:
+        - id
+        - name
     Course:
       title: Course
       x-stoplight:
         id: mirzo95ncdowy
       type: object
+      description: "The Course model represents a course within the system, encapsulating various attributes and associated data."
       properties:
         id:
           type: string
@@ -651,7 +749,7 @@ components:
           x-stoplight:
             id: dwbmi8sjybdp4
         teacher:
-          $ref: "#/components/schemas/User"
+          $ref: "#/components/schemas/Teacher"
           x-stoplight:
             id: nulwmp1n22cj6
         dates:
@@ -670,11 +768,15 @@ components:
             $ref: "#/components/schemas/CourseMaterial"
             x-stoplight:
               id: 9a1qawbwgtr7b
+      required:
+        - id
+        - name
     CourseDate:
       title: CourseDate
       x-stoplight:
         id: asg0lnfj7j7lv
       type: object
+      description: "The CourseDate model represents a course date within the system, encapsulating various attributes and associated data. "
       properties:
         id:
           type: string
@@ -687,7 +789,7 @@ components:
           x-stoplight:
             id: sulkr5ibgb2m9
         teacher:
-          $ref: "#/components/schemas/User"
+          $ref: "#/components/schemas/Teacher"
           x-stoplight:
             id: wmwz61a41sokc
         attendances:
@@ -703,6 +805,7 @@ components:
       x-stoplight:
         id: 6mncd0ml7fad2
       type: object
+      description: "The CourseDateAttendance model represents a course date attendance within the system, encapsulating various attributes and associated data. "
       properties:
         id:
           type: string
@@ -715,7 +818,7 @@ components:
           x-stoplight:
             id: wm2nkjactkkei
         student:
-          $ref: "#/components/schemas/User"
+          $ref: "#/components/schemas/Student"
           x-stoplight:
             id: 9egsshubs00ma
     CourseMaterial:
@@ -734,6 +837,7 @@ components:
           type: string
           x-stoplight:
             id: 09rkk73v01qch
+      description: "The CourseMaterial model represents a course material within the system, encapsulating various attributes and associated data. "
     User:
       title: User
       type: object
@@ -777,7 +881,57 @@ components:
         - lastName
         - email
         - emailVerified
-      description: ""
+      description: "The User model represents a user within the system, encapsulating various attributes and associated data. "
+    Student:
+      title: Student
+      x-stoplight:
+        id: j22m22ow21str
+      type: object
+      description: "The Student model represents a student within the system, encapsulating various attributes and associated data. "
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: w90h977b5nsux
+        identifiaction:
+          type: string
+          x-stoplight:
+            id: nut6wzw4663r6
+        user:
+          $ref: "#/components/schemas/User"
+          x-stoplight:
+            id: w2015lq4l023o
+        trainings:
+          type: string
+          x-stoplight:
+            id: otiq3ldx7tv6s
+    Teacher:
+      title: Teacher
+      x-stoplight:
+        id: n7r2zv7s8y8tz
+      type: object
+      description: "The Teacher model represents a teacher within the system, encapsulating various attributes and associated data. "
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: zyfh8jkgj0b4c
+        company:
+          type: string
+          x-stoplight:
+            id: ep9adech3ja08
+        user:
+          $ref: "#/components/schemas/User"
+          x-stoplight:
+            id: f5n3bndd6gwl2
+        trainings:
+          type: string
+          x-stoplight:
+            id: b3akg2gduoo2r
+        courses:
+          type: string
+          x-stoplight:
+            id: l3l54r5gs5nnp
   requestBodies:
     CreateCategory:
       content:
@@ -793,33 +947,165 @@ components:
                 type: string
                 x-stoplight:
                   id: mmzzuz2vjdd7q
+            required:
+              - name
+              - description
+      description: JSON object that provide the necessary informations for creating a category.
     CreateTraining:
       content:
         application/json:
           schema:
             type: object
+      description: JSON object that provide the necessary informations for creating a training.
     CreateCourse:
       content:
         application/json:
           schema:
             type: object
+            properties:
+              name:
+                type: string
+                x-stoplight:
+                  id: aovu343asrnw6
+              description:
+                type: string
+                x-stoplight:
+                  id: fxh0nug520un3
+            required:
+              - name
+              - description
+      description: JSON object that provide the necessary informations for creating a course.
     CreateCourseDate:
       content:
         application/json:
           schema:
             type: object
+            properties:
+              date:
+                type: string
+                x-stoplight:
+                  id: 17t4c7ctno82o
+              teacherId:
+                type: string
+                x-stoplight:
+                  id: di7u13qhfpvy5
+            required:
+              - date
+              - teacherId
+      description: JSON object that provide the necessary informations for creating a course date.
     CreateCourseMaterial:
       content:
-        application/json:
+        multipart/form-data:
           schema:
             type: object
+            properties:
+              name:
+                type: string
+                x-stoplight:
+                  id: 776r8gcc9i1st
+              description:
+                type: string
+                x-stoplight:
+                  id: p28a0pkipd58o
+              file:
+                type: string
+                x-stoplight:
+                  id: dy3hemyydpcim
+            required:
+              - name
+              - description
+              - file
+      description: JSON object that provide the necessary informations for creating a course material.
     LoginUser:
       content:
         application/json:
           schema:
             type: object
+      description: JSON object that provide the necessary informations for login a user.
     RegisterUser:
       content:
         application/json:
           schema:
             type: object
+            properties:
+              "":
+                type: string
+                x-stoplight:
+                  id: aa8d749qv6y9k
+      description: JSON object that provide the necessary informations for registering a user.
+    InviteTeacher:
+      content:
+        application/json:
+          schema:
+            type: object
+      description: JSON object that provide the necessary informations for inviting a teacher.
+    RegisterStudent:
+      content:
+        application/json:
+          schema:
+            type: object
+      description: JSON object that provide the necessary informations for registering a student.
+    InviteStudent:
+      content:
+        application/json:
+          schema:
+            type: object
+      description: JSON object that provide the necessary informations for inviting a student.
+    RegisterTeacher:
+      content:
+        application/json:
+          schema:
+            type: object
+      description: JSON object that provide the necessary informations for registering a teacher.
+  responses:
+    LoginSuccess:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+    DeleteSuccess:
+      description: The DeleteSuccess response confirms the successful deletion of a resource in the system.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                x-stoplight:
+                  id: iuz4r7k33tfdn
+              statusCode:
+                type: number
+                x-stoplight:
+                  id: f8ntbssibwyxi
+            required:
+              - message
+              - statusCode
+    UpdateCategorySuccess:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: string
+    UpdateTrainingSuccess:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: string
+    UpdateCourseSuccess:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: string
