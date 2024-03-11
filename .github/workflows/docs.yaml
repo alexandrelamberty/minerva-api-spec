@@ -1,3 +1,4 @@
+# This GitHub Action sets up a workflow to deploy documentation.
 name: Docs
 
 # This GitHub Action sets up a workflow to deploy documentation.
