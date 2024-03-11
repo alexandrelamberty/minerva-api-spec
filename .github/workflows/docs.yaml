@@ -1,3 +1,4 @@
+# This GitHub Action sets up a workflow to deploy documentation.
 name: Docs
 
 # This GitHub Action sets up a workflow to deploy documentation.
@@ -18,13 +19,18 @@ on:
   workflow_dispatch:
 
 jobs:
-  docs:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Code checkout
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Deploy
+      - name: Build
+        uses: alexandrelamberty/openapi-stoplight-doc-action@v1.0.2
+        with:
+          directory: ./docs
+
+      - name: Publish
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
